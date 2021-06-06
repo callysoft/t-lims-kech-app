@@ -1,0 +1,58 @@
+<div class="t-well">
+  <div class="row">
+    <div class="col-md-3 p-0">
+        <div class="img-box">
+          <img [src]="ad?.images[0] ? baseUrl + ad?.images[0] : '../../../../assets/images/blank.jpg'"
+               [attr.alt]="ad?.images[0] ? ad?.images[0] : '../../../../assets/images/blank.jpg'">
+          <div class="total-images"><strong>{{ad?.images?.length}}</strong> photos </div>
+        </div>
+      <!--<span class="ad-status">Featured</span>-->
+    </div>
+    <div class="col-md-9">
+      <div class="content-area">
+        <div class="d-flex justify-content-between">
+          <h3><a [routerLink]="[APP_URL.adView, ad.id, ad.titleDescription?.title, ad.code]">{{ad.titleDescription?.title}}</a></h3>
+          <ul class="additional-info">
+            <li>
+              <button tlimsButton class="mb-2 btn-sm" (click)="isOpenModal = true" translate>app.core.sendmessage <i
+                class="fa fa-envelope-o ml-1"></i></button>
+              
+            </li>
+            <li>
+          
+              <a href="tel:08038716433" class="fa fa-phone"></a>
+            </li>
+            <li><a href="https://wa.me/08038716433" class="fa fa-whatsapp"></a></li>
+            <li>
+              <a [tlimsFavorite]="ad"></a>
+            </li>
+          </ul>
+        </div>
+        <div class="row mt-2">
+          <div class="col-md-8">
+            <div class="category-title">
+              <span><a *ngIf="ad.category?.name" [routerLink]="[APP_URL.adView, ad.category?.code]">{{ad.category?.name}}</a></span>
+            </div>
+            <div class="ad-details">
+              <p [innerHTML]="ad.titleDescription?.description | shorten: 250: '...'"></p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="short-info">
+              <div class="ad-stats hidden-xs"><span class="mr-1">Condition: </span>New</div>
+              <div class="ad-stats hidden-xs"><span class="mr-1">Warranty: </span>7 Days</div>
+              <div class="ad-stats hidden-xs"><span class="mr-1">Sub Category: </span>Mobiles</div>
+            </div>
+            <div class="ad-price mt-3">{{(ad.price?.value) ? getSellingPrice(ad.price?.value, 2500) : 'N/A'}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<tlims-modal [dismissAble]="false" (close)="isOpenModal = $event" [visible]="isOpenModal" size="medium">
+  <tlims-message-form *ngIf="ad && isOpenModal" [recipient]="ad.contact?.email" [postId]="ad.id"
+                      (messageOutput)="sendMessage($event)"
+                      [isLoading]="isLoading"></tlims-message-form>
+</tlims-modal>

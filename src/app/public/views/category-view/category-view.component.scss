@@ -1,0 +1,27 @@
+.single-image {
+  background-repeat: no-repeat;
+  background-color: rgba(0, 0, 0, 0);
+  width: 400px;
+  height: 400px;
+  -webkit-background-size: contain;
+  background-size: contain;
+  background-position: top center;
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 400px;
+  -moz-box-flex: 0;
+  -ms-flex: 0 0 400px;
+  flex: 0 0 400px;
+}
+
+.h4-size {
+  color: #000;
+}
+
+.price {
+  position: relative;
+  font-weight: 700;
+  color: #f56d01;
+  margin-top: .8rem;
+  font-size: 27px;
+  letter-spacing: -0.015em;
+}

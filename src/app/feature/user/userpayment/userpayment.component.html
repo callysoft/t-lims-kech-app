@@ -1,0 +1,49 @@
+
+<div class="card">
+  <div class="card-body pt-0" style="margin-top: 50px;">
+    <h5 class="card-title font-weight-bold">My Transactions</h5>
+    <div class="row justify-content-end pb-3">
+      <div class="col-md-4">
+        <input class="searchTerm" type="text" name="searchTerm" placeholder="Filter"
+        [(ngModel)]="searchTerm" (input)="search($event.target.value)" />
+      </div>
+    </div>
+    <div class="table-responsive">
+   
+    
+
+    <table tlimsTable>
+        <thead>
+        <tr>
+          <th style="width: 3%;">#</th>
+          <th style="width: 6%;">Ref ID</th>
+          <th style="width: 9%;">Product Name</th>
+          <th style="width: 8%;">Amount</th>
+          <th style="width: 7%;">Date</th>
+          <th style="width: 7%;">Payment Status</th>
+          <th style="width: 8%;">Delivery Status</th>
+          
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let d of usertransactions; trackBy: trackByFn; index as i">
+          <td>{{i + 1}}</td>
+          <td>
+            {{d.referenceid}}
+          </td>
+          <td>{{d.productname}} </td>
+          <td>{{d.vendorprice}}</td>
+          <td>{{d.createdat}}</td>
+          <td>{{d.payment_status}}</td>
+          <td>{{d.delivery_status}}</td>
+          
+          
+        </tr>
+        </tbody>
+      </table>
+      <div class="alert text-center" *ngIf="usertransactions?.length <= 0">No Payment Transaction Created Yet</div>
+      </div>
+      </div>
+      </div>
+  
+  

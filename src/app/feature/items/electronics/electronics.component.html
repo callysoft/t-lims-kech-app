@@ -1,0 +1,138 @@
+<form [formGroup]="eForm" novalidate>
+  <div class="row">
+    <div class="col-md-6">
+      <div formGroupName="subCategory">
+        <tlims-form-group label="Subcategory" required="true">
+          <select tlimsInput (change)="populateCodeValueName('subCategory')" formControlName="code">
+            <option *ngFor="let subCat of subCategories" [value]="subCat.categoryCode?.dataCode">{{subCat.titleDescription?.title}}</option>
+          </select>
+        </tlims-form-group>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div formGroupName="titleDescription">
+        <tlims-form-group label="Title" required="true">
+          <input tlimsInput placeholder="title" formControlName="title"/>
+          <tlims-form-error [control]="eForm.get('titleDescription').get('title')"></tlims-form-error>
+        </tlims-form-group>
+      </div>
+    </div>
+    <div class="col-md-6" *ngIf="isField1 || isField4 || isField3 || isField2">
+      <tlims-form-group label="Item Type" required="true" [isLoading]="isDataLoading">
+        <select tlimsInput formControlName="subCatType">
+          <option [ngValue]="null">--Select Item Type--</option>
+          <option *ngFor="let iType of itemTypes" [ngValue]="iType">{{iType.name}}</option>
+        </select>
+        <tlims-form-error [control]="eForm.get('subCatType')" label="Item Type"></tlims-form-error>
+      </tlims-form-group>
+    </div>
+    <div class="col-md-6" *ngIf="isField2 || isField4">
+      <tlims-form-group label="Brand" required="true">
+        <select tlimsInput formControlName="brand">
+          <option [ngValue]="null">--Select Brand--</option>
+          <option *ngFor="let bd of brands" [ngValue]="bd">{{bd.name}}</option>
+        </select>
+        <tlims-form-error [control]="eForm.get('brand')" label="Brand"></tlims-form-error>
+      </tlims-form-group>
+    </div>
+    <div class="col-md-6" *ngIf="isField3">
+      <tlims-form-group label="Make" required="true">
+        <select tlimsInput formControlName="electMake">
+          <option [ngValue]="null">--Select Make--</option>
+          <option *ngFor="let mk of itemMakes" [ngValue]="mk">{{mk.name}}</option>
+        </select>
+        <tlims-form-error [control]="eForm.get('electMake')" label="Make"></tlims-form-error>
+      </tlims-form-group>
+    </div>
+    <div class="col-md-6" *ngIf="isField4">
+      <tlims-form-group label="Model" required="true">
+        <input tlimsInput formControlName="model">
+        <tlims-form-error [control]="eForm.get('model')"></tlims-form-error>
+      </tlims-form-group>
+    </div>
+    <div class="col-md-6" *ngIf="isField4">
+      <tlims-form-group label="Processor" required="true">
+        <select tlimsInput formControlName="processor">
+          <option [ngValue]="null">--Select Processor--</option>
+          <option *ngFor="let mk of processors" [ngValue]="mk">{{mk.name}}</option>
+        </select>
+        <tlims-form-error [control]="eForm.get('processor')"></tlims-form-error>
+      </tlims-form-group>
+    </div>
+    <div class="col-md-6" *ngIf="isField4" required="true">
+      <tlims-form-group label="Number of Core(s)">
+        <select tlimsInput formControlName="coreNo">
+          <option [ngValue]="null">--Select Number of Core(s)--</option>
+          <option *ngFor="let mk of cores" [ngValue]="mk">{{mk.name}}</option>
+        </select>
+        <tlims-form-error [control]="eForm.get('coreNo')" label="Number of Core(s)"></tlims-form-error>
+      </tlims-form-group>
+    </div>
+    <div class="col-md-6" *ngIf="isField4">
+      <tlims-form-group label="Ram" required="true">
+        <select tlimsInput formControlName="ram">
+          <option [ngValue]="null">--Select Ram--</option>
+          <option *ngFor="let mk of rams" [ngValue]="mk">{{mk.name}}</option>
+        </select>
+        <tlims-form-error [control]="eForm.get('ram')"></tlims-form-error>
+      </tlims-form-group>
+    </div>
+    <div class="col-md-6" *ngIf="isField4">
+      <tlims-form-group label="Storage Capacity" required="true">
+        <select tlimsInput formControlName="capacity">
+          <option [ngValue]="null">--Select Storage Capacity--</option>
+          <option *ngFor="let mk of rams" [ngValue]="mk">{{mk.name}}</option>
+        </select>
+        <tlims-form-error [control]="eForm.get('capacity')" label="Storage Capacity"></tlims-form-error>
+      </tlims-form-group>
+    </div>
+    <div class="col-md-6">
+        <tlims-form-group label="Condition" required="true">
+          <select tlimsInput formControlName="itemCondition">
+            <option [ngValue]="null">--Select Condition--</option>
+            <option *ngFor="let cod of conditions" [value]="cod.name">{{cod.value}}</option>
+          </select>
+          <tlims-form-error [control]="eForm.get('itemCondition')" label="Condition"></tlims-form-error>
+        </tlims-form-group>
+    </div>
+    <div class="col-md-6">
+      <tlims-form-group label="Seller's Price">
+        <tlims-amount formControlName="price" [(ngModel)]="price"></tlims-amount>
+        <tlims-form-error [control]="eForm.get('price')"></tlims-form-error>
+      </tlims-form-group>
+    </div>
+
+    <div class="col-md-6">
+      <tlims-form-group label="Selling Price" required="true" type="number">
+      
+<input type="number" class="form-control" value="{{price*1+2500}}" readonly="readonly" name="selling_price">
+
+    </tlims-form-group>
+    </div>
+    <div class="col-md-6">
+      <tlims-form-group>
+        <div class="form-check mt-3">
+          <label class="form-check-label">
+            <input type="checkbox" name="negotiable" formControlName="negotiable"> Negotiable
+          </label>
+        </div>
+      </tlims-form-group>
+    </div>
+    <div class="col-md-12">
+      <div formGroupName="titleDescription">
+        <tlims-description-box formControlName="description"></tlims-description-box>
+        <tlims-form-error [control]="eForm.get('titleDescription').get('description')"></tlims-form-error>
+      </div>
+    </div>
+  </div>
+  <tlims-image-upload (images)="getImages($event)"></tlims-image-upload>
+  <tlims-contact-form (contactDetails)="getContact($event)"></tlims-contact-form>
+  <div class="row mt-4">
+    <div class="col-md-12">
+      <div class="form-group text-center">
+        <button [tlimsButton]="isLoading" (click)="create()" [disabled]="eForm.invalid">Save</button>
+        <button tlimsButton color="btn-danger" [disabled]="isLoading" (click)="cancel()">Cancel</button>
+      </div>
+    </div>
+  </div>
+</form>

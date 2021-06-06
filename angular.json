@@ -1,0 +1,232 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "cli": {
+    "analytics": false
+  },
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "t-lims-kech-app": {
+      "root": "",
+      "sourceRoot": "src",
+      "projectType": "application",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "allowedCommonJsDependencies": [
+              "ngx-owl-carouse",
+              "util",
+              "rxjs/BehaviorSubject",
+              "core-js/modules/es.array.map",
+              "rxjs/observable/throw",
+              "ngx-image-zoom",
+              "enum-values",
+              "core-js/modules/es.reflect.get-prototype-of",
+              "core-js/modules/es.reflect.apply",
+              "core-js/modules/es.map",
+              "core-js/modules/es.array.slice",
+              "core-js/modules/es.symbol.iterator",
+              "core-js/modules/es.symbol.description",
+              "core-js/modules/web.dom-collections.iterator",
+              "core-js/modules/es.array.iterator",
+              "core-js/modules/es.reflect.delete-property",
+              "core-js/modules/es.array.fill",
+              "core-js/modules/es.number.constructor",
+              "core-js/modules/es.array.reverse",
+              "core-js/modules/es.array.index-of",
+              "core-js/modules/es.string.trim",
+              "core-js/modules/es.string.iterator",
+              "core-js/modules/es.string.includes",
+              "core-js/modules/es.array.some",
+              "core-js/modules/es.array.includes",
+              "core-js/modules/es.array.from",
+              "core-js/modules/es.regexp.to-string",
+              "core-js/modules/es.reflect.construct",
+              "xlsx",
+              "core-js/modules/es.function.name",
+              "core-js/modules/es.string.split",
+              "core-js/modules/es.promise",
+              "core-js/modules/es.object.to-string",
+              "core-js/modules/es.array.reduce",
+              "core-js/modules/es.array.concat",
+              "core-js/modules/es.array.every",
+              "@babel/runtime/helpers/get",
+              "@babel/runtime/helpers/toConsumableArray",
+              "@babel/runtime/helpers/inherits",
+              "@babel/runtime/helpers/possibleConstructorReturn",
+              "core-js/modules/web.dom-collections.for-each",
+              "core-js/modules/es.object.keys",
+              "core-js/modules/es.object.get-own-property-descriptors",
+              "core-js/modules/es.object.get-own-property-descriptor",
+              "core-js/modules/es.array.for-each",
+              "core-js/modules/es.array.filter",
+              "core-js/modules/es.symbol",
+              "@babel/runtime/helpers/slicedToArray",
+              "core-js/modules/es.array.join",
+              "core-js/modules/es.string.starts-with",
+              "core-js/modules/es.string.replace",
+              "core-js/modules/es.string.match",
+              "core-js/modules/es.regexp.exec",
+              "raf",
+              "@babel/runtime/regenerator",
+              "ngx-owl-carousel",
+              "rxjs/observable/of",
+              "rxjs/Subject",
+              "rxjs/Observable"
+            ],
+            "outputPath": "dist",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "tsConfig": "src/tsconfig.app.json",
+            "polyfills": "src/polyfills.ts",
+            "assets": [
+              "src/assets",
+              "src/favicon.ico"
+            ],
+            "styles": [
+              "src/styles.scss",
+              "node_modules/simple-line-icons/css/simple-line-icons.css",
+              "node_modules/ngx-toastr/toastr.css",
+              "node_modules/slick-carousel/slick/slick.scss",
+              "node_modules/slick-carousel/slick/slick-theme.scss",
+              "node_modules/ngx-owl-carousel-o/lib/styles/prebuilt-themes/owl.carousel.min.css",
+              "node_modules/owl.carousel/dist/assets/owl.theme.default.min.css",
+              "node_modules/ngx-owl-carousel-o/lib/styles/prebuilt-themes/owl.theme.default.min.css",
+              "node_modules/datatables.net-dt/css/jquery.dataTables.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css"
+            ],
+            "scripts": [
+              "node_modules/slick-carousel/slick/slick.min.js",
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/owl.carousel/dist/owl.carousel.min.js",
+              "node_modules/jquery/dist/jquery.js",
+              "node_modules/bootstrap/dist/js/bootstrap.js",
+              "node_modules/datatables.net/js/jquery.dataTables.js",
+              "node_modules/jquery/dist/jquery.js"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "t-lims-kech-app:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "t-lims-kech-app:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "t-lims-kech-app:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "src/test.ts",
+            "karmaConfig": "./karma.conf.js",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "src/tsconfig.spec.json",
+            "scripts": [],
+            "styles": [],
+            "assets": [
+              "src/assets",
+              "src/favicon.ico"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "src/tsconfig.app.json",
+              "src/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy",
+          "options": {}
+        }
+      }
+    },
+    "t-lims-kech-app-e2e": {
+      "root": "e2e",
+      "sourceRoot": "e2e",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "./protractor.conf.js",
+            "devServerTarget": "t-lims-kech-app:serve"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "e2e/tsconfig.e2e.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "t-lims-kech-app",
+  "schematics": {
+    "@schematics/angular:class": {
+      "spec": false
+    },
+    "@schematics/angular:component": {
+      "spec": false,
+      "prefix": "tlims",
+      "styleext": "scss"
+    },
+    "@schematics/angular:directive": {
+      "spec": false,
+      "prefix": "tlims"
+    },
+    "@schematics/angular:guard": {
+      "spec": false
+    },
+    "@schematics/angular:module": {
+      "spec": false
+    },
+    "@schematics/angular:pipe": {
+      "spec": false
+    },
+    "@schematics/angular:service": {
+      "spec": false
+    }
+  }
+}

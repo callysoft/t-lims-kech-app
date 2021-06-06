@@ -1,0 +1,48 @@
+     <form novalidate [formGroup]="mForm" (ngSubmit)="onSubmit()">
+  <div class="mb-3" *ngIf="title">
+    <h3 class="mb-0 font-weight-bold">{{'app.core.message' | translate}}</h3>
+
+    <ng-container *ngIf="isSuccess">
+      <div class="alert alert-success">
+       Message Sent successfully;
+      </div>
+    </ng-container>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div>
+        <tlims-form-group label="app.core.name">
+          <input type="text" class="form-control" [placeholder]="'app.core.name' | translate" formControlName="name">
+        </tlims-form-group>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div>
+        <tlims-form-group label="app.core.phonenumber">
+          <input type="text" class="form-control" [placeholder]="'app.core.phonenumber' | translate" formControlName="phoneNumber">
+        </tlims-form-group>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div>
+        <tlims-form-group label="app.core.email">
+          <input type="text" class="form-control"  [placeholder]="'app.core.email' | translate" formControlName="email">
+        </tlims-form-group>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <tlims-form-group label="app.core.recipient">
+        <input type="email" class="form-control-plaintext" formControlName="recipient">
+      </tlims-form-group>
+    </div>
+    <div class="col-md-12">
+      <textarea class="form-control" rows="4" cols="100" formControlName="content"></textarea>
+    
+    </div>
+  </div>
+
+  <div class="form-group">
+    <button type="submit" class="btn btn-info" [tlimsButton]="isLoading" [disabled]="disableBtn" translate>send Email <i class="fa fa-send-o ml-2"></i></button>
+         </div>
+</form>
+

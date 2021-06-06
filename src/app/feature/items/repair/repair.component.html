@@ -1,0 +1,90 @@
+<form [formGroup]="rForm" novalidate>
+  <div class="row">
+    <div class="col-md-6">
+      <div formGroupName="subCategory">
+        <tlims-form-group label="Subcategory" required="true">
+          <select tlimsInput formControlName="code" (change)="resolveFields()">
+            <option *ngFor="let subCat of subCategories"
+                    [value]="subCat.categoryCode?.dataCode">{{subCat.titleDescription?.title}}</option>
+          </select>
+        </tlims-form-group>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div formGroupName="titleDescription">
+        <tlims-form-group label="Title" required="true">
+          <input tlimsInput placeholder="title" formControlName="title"/>
+          <tlims-form-error [control]="rForm.get('titleDescription').get('title')"></tlims-form-error>
+        </tlims-form-group>
+      </div>
+    </div>
+    <div class="col-md-6" *ngIf="isField1">
+      <tlims-form-group label="Item Type" required="true">
+        <select tlimsInput formControlName="subCatType">
+          <option [ngValue]="null">--Select Item Type--</option>
+          <option *ngFor="let item of itemTypes" [ngValue]="item">{{item.name}}</option>
+        </select>
+        <tlims-form-error [control]="rForm.get('subCatType')" label="Item Type"></tlims-form-error>
+      </tlims-form-group>
+    </div>
+    <div class="col-md-6" *ngIf="isField3">
+      <tlims-form-group label="Shape">
+        <select tlimsInput formControlName="shape">
+          <option [ngValue]="null">--Select Shape--</option>
+          <option *ngFor="let item of shapes" [ngValue]="item">{{item.name}}</option>
+        </select>
+        <tlims-form-error [control]="rForm.get('shape')"></tlims-form-error>
+      </tlims-form-group>
+    </div>
+    <div class="col-md-6" *ngIf="isField3">
+      <tlims-form-group label="Frame Material">
+        <select tlimsInput formControlName="frameMaterial">
+          <option [ngValue]="null">--Select Frame Material--</option>
+          <option *ngFor="let item of frameMaterials" [ngValue]="item">{{item.name}}</option>
+        </select>
+        <tlims-form-error [control]="rForm.get('frameMaterial')" label="Frame Material"></tlims-form-error>
+      </tlims-form-group>
+    </div>
+    <div class="col-md-6" *ngIf="isField2">
+      <tlims-form-group label="Condition">
+        <select tlimsInput formControlName="itemCondition">
+          <option [ngValue]="null">--Select Condition--</option>
+          <option *ngFor="let cond of conditions" [value]="cond.name">{{cond.value}}</option>
+        </select>
+      </tlims-form-group>
+      <tlims-form-error [control]="rForm.get('itemCondition')" label="Condition"></tlims-form-error>
+    </div>
+    <div class="col-md-6">
+      <tlims-form-group label="Price" required="true">
+        <tlims-amount formControlName="price"></tlims-amount>
+        <tlims-form-error [control]="rForm.get('price')" label="Price"></tlims-form-error>
+      </tlims-form-group>
+    </div>
+  
+    <div class="col-md-6">
+      <tlims-form-group>
+        <div class="form-check mt-4">
+          <label class="form-check-label">
+            <input type="checkbox" name="negotiable" formControlName="negotiable"> Negotiable
+          </label>
+        </div>
+      </tlims-form-group>
+    </div>
+    <div class="col-md-12">
+      <div formGroupName="titleDescription">
+        <tlims-description-box formControlName="description" [showToolbar]="false"></tlims-description-box>
+        <tlims-form-error [control]="rForm.get('titleDescription').get('description')"></tlims-form-error>
+      </div>
+    </div>
+  </div>
+  <tlims-image-upload (images)="getImages($event)"></tlims-image-upload>
+  <tlims-contact-form (contactDetails)="getContact($event)"></tlims-contact-form>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group text-center">
+        <button [tlimsButton]="isLoading" (click)="create()" [disabled]="rForm.invalid">Save</button>
+        <button tlimsButton color="btn-danger" [disabled]="isLoading" (click)="cancel()">Cancel</button>
+      </div>
+    </div>
+  </div>
+</form>

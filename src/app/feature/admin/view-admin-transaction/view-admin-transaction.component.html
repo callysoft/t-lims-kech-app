@@ -1,0 +1,123 @@
+<div class="card card-body" *blockUI="'ad-list'">
+    <h5 class="card-title font-weight-bold">All Transactions</h5>
+   
+
+    <div class="table-responsive">
+      
+      <div class="row justify-content-end pb-3">
+        <div class="col-md-4" style="margin-top: 50px;">
+          <input class="searchTerm" type="text" name="searchTerm" placeholder="Filter"
+          [(ngModel)]="searchTerm" (input)="search($event.target.value)" />
+        </div>
+      </div>
+      
+      <table class="table table-bordered">
+        <thead>
+        <tr>
+          <th>#</th>
+          <th style="max-width: 10%;">Reference Id</th>
+          <th>Product Name</th>
+          <th>Sellers Amount</th>
+          <th>Vendor Email</th>
+          <th>Selling Amount</th>
+          <th>Commission</th>
+          <th>Transaction Date</th>
+          <th>Payment Status</th>
+          <th>Delivery Status</th>
+          <th>Action</th>
+          
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let d of usertransactions; trackBy: trackByFn; index as i">
+          <td>{{i + 1}}</td>
+          <td>
+            {{d.referenceid}}
+          </td>
+          <td>{{d.productname}}</td>
+          <td>{{d.vendorprice}}</td>
+          <td>{{d.vendoremail}}</td>
+          <td>{{d.amountpaid}}</td>
+          <td>{{d.amountpaid-d.vendorprice}}</td>
+          <td>{{d.createdat}}</td>
+          <td>{{d.payment_status}}</td>
+          <td>{{ d.delivery_status }}</td>
+          <td>
+            <button type="button" class="btn btn-primary" (click)="setCustomerDetails(d)">
+              {{d.id}} UPDATE
+            </button>
+            </td>
+        
+         
+        </tr>
+        </tbody>
+      </table>
+      
+      <div class="alert text-center" *ngIf="usertransactions?.length <= 0">No Payment Transaction Created Yet</div>
+    </div>
+  </div>
+  <div *ngIf="showCustomer" >
+    <h3 >Update Transactions</h3>
+    <form [formGroup]="updateForm" (ngSubmit)="onUpdate()">
+        <!-- ID -->   
+        <div class="form-row" >
+        <div class="col-md-4">
+          <label style="margin-left: 20px;" for="id">Id:</label>
+          <input type="text" class="form-control" [(ngModel)]="showCustomer.id"
+                   formControlName="id" disabled>
+        </div>      
+        <!-- First formControlName -->   
+        <div class="form-group col-md-4">
+          <label style="margin-left: 20px;" for="referenceid">Reference ID:</label>
+          <input type="text" class="form-control" [(ngModel)]="showCustomer.referenceid"
+                   formControlName="referenceid" disabled>
+        </div>
+        <!-- Last formControlName -->
+        <div class="form-group col-md-3">
+            <label style="margin-left: 20px;" for="productformControlName">Product Name:</label>
+            <input type="text" class="form-control" [(ngModel)]="showCustomer.productname"
+                   formControlName="productname" disabled>
+        </div>  
+        <!-- Address -->
+        <div class="form-group col-md-4">
+            <label style="margin-left: 10px;" for="amountpaid">Amount Paid:</label>
+            <input type="text" class="form-control" 
+                     required [(ngModel)]="showCustomer.amountpaid" formControlName="amountpaid" disabled>
+        </div>  
+        
+        
+        <!-- Age -->
+        <div class="form-group col-md-4">
+          <label style="margin-left: 20px;" for="date">Date</label>
+          <input type="text" class="form-control" [(ngModel)]="showCustomer.createdat"
+                      formControlName="createdat" disabled>
+        </div>
+        <div class="form-group col-md-3">
+          <label style="margin-left: 20px;" for="payment_status">Payment Status</label>
+          <input type="text" class="form-control" [(ngModel)]="showCustomer.payment_status"
+                   formControlName="payment_status" disabled>
+        </div>
+
+        <div class="form-group col-md-4">
+          <label for="delivery_status" style="margin-left: 20px;">Delivery Status</label>
+          <select class="form-control" formControlName="delivery_status">
+            <option value="{{showCustomer.delivery_status}}" selected>{{showCustomer.delivery_status}}</option>
+            <option value="pending">pending</option>
+            <option value="processing">processing</option>
+            <option value="cancelled">cancelled</option>
+            <option value="delivered">delivered</option>
+          </select>
+        </div>
+       
+
+        <div class="form-group col-md-4" style="margin-top: 30px; margin-left: 30px;">
+          <button type="submit" class="btn btn-success">Update</button>
+          </div>
+        </div>
+      </form>
+</div>
+  
+  
+
+
+

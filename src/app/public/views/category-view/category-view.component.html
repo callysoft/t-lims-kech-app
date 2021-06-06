@@ -1,0 +1,137 @@
+<tlims-search-box title="Item Details"></tlims-search-box>
+<tlims-content>
+  <div class="container">
+    <div class="d-block mb-4" *ngIf="ad">
+      <div class="row" *blockUI="'view'">
+        <div class="col-md-9">
+          <div class="card border-0 box-shadow-none">
+            <div class="card-body py-1">
+              <h3 class="card-title mb-0 f-20">{{ad.titleDescription?.title}}</h3>
+              <div class="row">
+                <div class="col-md-7">
+                  <div class="d-block py-3">
+                    <ngx-slick-carousel class="carousel" [config]="slideConfig" #slickModal="slick-carousel">
+                      <div ngxSlickItem *ngFor="let img of ad?.images" class="slide">
+                        <img [src]="baseUrl + img" alt="" class="img" height="400" width="100%">
+                      </div>
+                    </ngx-slick-carousel>
+                    <div class="d-flex flex-row justify-content-start mt-3">
+                      <img *ngFor="let img of ad?.images; index as i" [src]="baseUrl + img"
+                           class="img avatar click" (click)="slickModal.slickGoTo(i)"
+                           [attr.alt]="img">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-5 mt-sm-2 mt-2">
+                  <div class="d-flex flex-sm-wrap justify-content-md-between mb-1" *ngIf="ad.price">
+                    <div class="font-weight-bold">Price:</div>
+                    <div class="ml-md-0 ml-auto mt-sm-0 f-18 font-weight-bold text-warning-400">{{(ad.price?.value) ? getSellingPrice(ad.price?.value, 2500) : 'N/A'}}</div>
+                  </div>
+                  <div class="d-flex flex-sm-wrap justify-content-md-between mb-1">
+                    <div class="font-weight-bold">Category:</div>
+                    <div class="ml-md-0 ml-auto mt-sm-0">{{ad.category?.name}}</div>
+                  </div>
+                  <div class="d-flex flex-sm-wrap justify-content-md-between mb-1">
+                    <div class="font-weight-bold">Subcategory:</div>
+                    <div class="ml-md-0 ml-auto mt-sm-0">{{ad.subCategory?.name}}</div>
+                  </div>
+                  <div class="d-flex flex-sm-wrap justify-content-md-between mb-1" *ngIf="ad.subCatType">
+                    <div class="font-weight-bold">Item Type:</div>
+                    <div class="ml-md-0 ml-auto mt-sm-0">{{ad.subCatType?.name}}</div>
+                  </div>
+                  <div class="d-flex flex-sm-wrap justify-content-md-between mb-1" *ngIf="ad.brand">
+                    <div class="font-weight-bold">Brand:</div>
+                    <div class="ml-md-0 ml-auto mt-sm-0">{{ad.brand?.name}}</div>
+                  </div>
+                  <div class="d-flex flex-sm-wrap justify-content-md-between mb-1" *ngIf="ad?.gender">
+                    <div class="font-weight-bold">Gender:</div>
+                    <div class="ml-md-0 ml-auto mt-sm-0">{{ad.gender | titlecase}}</div>
+                  </div>
+                  <div class="d-flex flex-sm-wrap justify-content-md-between mb-1" *ngIf="ad?.itemCondition">
+                    <div class="font-weight-bold">Condition:</div>
+                    <div class="ml-md-0 ml-auto mt-sm-0">{{ad.itemCondition | titlecase}}</div>
+                  </div>
+                  <div class="d-flex flex-sm-wrap justify-content-md-between mb-1" *ngIf="ad?.color">
+                    <div class="font-weight-bold">Color:</div>
+                    <div class="ml-md-0 ml-auto mt-sm-0">{{ad.color | codeValueTokenizer}}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card card-body border-0 box-shadow-none">
+            <div class="col-md-12">
+              <h5 class="font-weight-bold">Description</h5>
+              <p [innerHTML]="ad.titleDescription?.description | sanitize | shorten: 500: readMore"></p>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col-md-3 col-12">
+          <div class="card tk-box-shadow card-body">
+            <div class="info-title"><h5>{{'app.core.sellerinfo' | translate}}</h5></div>
+            <div class="media align-items-center align-items-md-start text-center text-md-left flex-column flex-md-row mb-3">
+              <div class="mr-md-3 mb-2 mb-md-0">
+                <a href="#">
+                  <img src="../../../../assets/images/5.png" class="rounded-circle" width="60" height="60" alt="">
+                </a>
+              </div>
+
+              <div class="media-body">
+                <h6 class="card-title mb-1 font-weight-bold">Tlims-Kech</h6>
+                <p class="mb-0 text-grey-300 font-weight-bold"><i class="lni-phone-handset mr-2"></i>{{08057328174 | shorten: numberLength: 'XXXXX'}}</p>
+                <!--<p class="mb-0 text-grey-300 font-weight-bold"><i class="lni-envelope mr-2"></i>{{ad.contact?.email}}</p>-->
+              </div>
+            </div>
+
+           <!-- <i class="fa fa-user f-32 border-1 rounded-round p-3 mb-3 mt-1"></i>
+            <h5 class="card-title mb-0 font-weight-bold">{{ad.contact?.name}}</h5>
+            <p class="text-muted mb-0">{{ad.contact?.email}}</p>
+            <h6
+              class="text-danger font-weight-semibold"> {{ad.contact?.phoneNumber | shorten: numberLength: 'XXXXX'}}</h6>-->
+            <!--<p class="mb-3">Ouch found swore much dear conductively hid submissively hatchet vexed far</p>-->
+            <div class="d-flex flex-column justify-content-around">
+          <input type="hidden" value="{{(ad.price?.value) ? getSellingP(ad.price?.value, 2500) : 'N/A'}}">
+
+
+              <button
+              angular4-paystack
+              [key]="'pk_live_bb9fe7548eb3e06e4aaac6bd0150736ac98e68ec'"
+              [email]="'customerservice@tlims-kech.com'"
+              [amount]="paystackAmount"
+              [ref]="reference"
+              [class]="'btn-sm btn bg-warning'"
+              (paymentInit)="paymentInit()"
+              (onClose)="paymentCancel()"
+              (callback)="paymentDone($event)"
+            >
+              Pay Now
+            </button>
+            
+              <!-- <button class="btn-sm btn bg-warning" (click)="toggleNumber()" translate> {{btnTitle}}</button> -->
+            </div>
+           
+
+          <!-- send pay to database   -->
+
+     
+           
+
+
+
+
+
+            
+          </div>
+          <tlims-safety></tlims-safety>
+      
+        </div>
+      </div>
+    </div>
+    <tlims-recommended></tlims-recommended>
+  </div>
+</tlims-content>
+
+

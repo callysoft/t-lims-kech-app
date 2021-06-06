@@ -1,0 +1,56 @@
+<tlims-search-box title="Dashboard" [withBreadCrumb]="false" [withSearch]="false"></tlims-search-box>
+<tlims-content>
+  <div class="row">
+    <div class="col">
+      <a class="card" routerLink="/tlims/bo/user">
+        <div class="card-body text-center">
+          <i class="fa fa-user f-38"></i>
+          <h5 class="box-text">Manage Profile</h5>
+        </div>
+      </a>
+    </div>
+    <div class="col">
+      <a class="card" routerLink="/tlims/bo/user/ads">
+        <div class="card-body text-center">
+          <i class="fa fa-list f-38"></i>
+          <h5 class="box-text">My Ads</h5>
+        </div>
+      </a>
+    </div>
+    <div class="col">
+      <a class="card" routerLink="/tlims/bo/user/products/:id">
+        <div class="card-body text-center">
+          <i class="fa fa-money f-38"></i>
+          <h5 class="box-text">Completed Transactions</h5>
+        </div>
+      </a>
+    </div>
+
+    <div class="col">
+      <a class="card" routerLink="/tlims/bo/user/favorites">
+        <div class="card-body text-center">
+          <i class="fa fa-heart f-38"></i>
+          <h5 class="box-text">Favorite Ads</h5>
+        </div>
+      </a>
+    </div>
+    <div class="col">
+      <a class="card" routerLink="/tlims/bo/admin">
+        <div class="card-body text-center">
+          <i class="fa fa-cogs f-38"></i>
+          <h5 class="box-text">Settings</h5>
+        </div>
+      </a>
+    </div>
+    <div class="col">
+      <a class="card" routerLink="/tlims/bo/user/messages">
+        <div class="card-body text-center">
+          <i class="fa fa-inbox f-38"></i>
+          <h5 class="box-text">Messages</h5>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <div id="chartdiv" style="width: 100%; height: 500px"></div>
+</tlims-content>

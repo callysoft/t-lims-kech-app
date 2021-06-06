@@ -1,0 +1,40 @@
+<div class="card border-0">
+  <div class="position-relative">
+    <img class="card-img-top img-fluid" [src]="ad?.images[0] ? baseUrl + ad?.images[0] : '../../../../assets/images/blank.jpg'"
+         [attr.alt]="ad?.images[0] ? ad?.images[0] : '../../../../assets/images/blank.jpg'">
+    <div class="total-images"><strong>{{ad?.images?.length}}</strong> photos</div>
+  </div>
+  <div class="card-body d-flex flex-column">
+    <div class="mb-0 grid-title">
+      <a [routerLink]="[APP_URL.adView, ad.id, ad.titleDescription?.title, ad.code]" class="text-default mb-0">
+        {{ad.titleDescription?.title  | shorten: 50: '...'}}</a>
+    </div>
+    <div class="mt-1">
+      <a [routerLink]="[APP_URL.adView, ad.category?.code]" class="text-grey-600 font-weight-bold f-13">({{ad.category?.name}})</a>
+<h5 class="mb-0 font-weight-bold text-warning">{{(ad.price?.value) ? getSellingPrice(ad.price?.value, 2500) : 'N/A'}}</h5>
+    </div>
+  </div>
+  <ul class="additional-info justify-content-center mb-2">
+    <li>
+      <button tlimsButton class="mb-2 btn-sm" (click)="isOpenModal = true" translate>app.core.sendmessage <i
+        class="fa fa-envelope-o ml-1"></i></button>
+      
+    </li>
+    <li>
+  
+      <a href="tel:08038716433" class="fa fa-phone"></a>
+
+    </li>
+    <li><a href="https://wa.me/08038716433" class="fa fa-whatsapp"></a></li>
+    <li>
+      <a [tlimsFavorite]="ad"></a>
+    </li>
+  </ul>
+</div>
+
+<tlims-modal [dismissAble]="false" (close)="isOpenModal = $event" [visible]="isOpenModal" size="medium">
+  <tlims-message-form *ngIf="ad && isOpenModal" [recipient]="ad.contact?.email" [postId]="ad.id"
+                      (messageOutput)="sendMessage($event)"
+                      [isLoading]="isLoading"></tlims-message-form>
+</tlims-modal>
+

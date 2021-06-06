@@ -1,0 +1,57 @@
+<div  >
+    <h3 >Update Transactions</h3>
+    <form [formGroup]="updateForm" (ngSubmit)="onUpdate()">
+        <!-- ID -->   
+        <div class="form-row" >
+        <div class="col-md-6">
+          <label style="margin-left: 20px;" for="id">Id:</label>
+          <input type="text" class="form-control" 
+                   formControlName="id" disabled>
+        </div>      
+        <!-- First name -->   
+        <div class="form-group col-md-5">
+          <label style="margin-left: 20px;" for="referenceid">Reference ID:</label>
+          <input type="text" class="form-control"
+                   formControlName="referenceid" disabled>
+        </div>
+        <!-- Last name -->
+        <div class="form-group col-md-6">
+            <label style="margin-left: 20px;" for="productname">Product Name:</label>
+            <input type="text" class="form-control" 
+                   formControlName="productname" disabled>
+        </div>  
+        <!-- Address -->
+        <!-- <div class="form-group col-md-5"> -->
+            <!-- <label style="margin-left: 20px;" for="amountpaid">Amount Paid:</label> -->
+            <!-- <input type="text" class="form-control"  -->
+                      <!-- id="amountpaid" required [(ngModel)]="customer.amountpaid" formControlName="amountpaid" disabled> -->
+        <!-- </div>   -->
+        
+        
+        <!-- Age -->
+        <div class="form-group col-md-5">
+          <label style="margin-left: 20px;" for="date">Date</label>
+          <input type="text" class="form-control"
+                      formControlName="createdat" disabled>
+        </div>
+        <div class="form-group col-md-6">
+          <label style="margin-left: 20px;" for="payment_status">Payment Status</label>
+          <input type="text" class="form-control"
+                   formControlName="payment_status" disabled>
+        </div>
+
+        <div class="form-group col-md-5">
+          <label for="delivery_status" style="margin-left: 20px;">Delivery Status</label>
+          <select class="form-control" formControlName="delivery_status">
+            <option value="pending">pending</option>
+            <option value="processing">processing</option>
+            <option value="cancelled">cancelled</option>
+            <option value="delivered">delivered</option>
+          </select>
+        </div>
+        <div class="form-group col-md-5">
+        <button type="submit" class="btn btn-success">Update</button>
+        </div>
+        </div>
+      </form>
+</div>

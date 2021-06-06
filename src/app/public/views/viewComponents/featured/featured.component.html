@@ -1,0 +1,46 @@
+<section class="tk-row3">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 category-col" *blockUI="'featuresList'">
+        <div class="flexbox tk-heading">
+          <h3 class="tk-bold">{{'app.core.featureditems' | translate}}</h3>
+          <div class="btn-group">
+            <ng-container *ngIf="ads.length > 4">
+              <button (click)="owlCar.prev()" class="btn-prev"></button>
+              <button (click)="owlCar.next()" class="btn-next"></button>
+            </ng-container>
+          </div>
+        </div>
+        <owl-carousel-o [options]="customOptions" #owlCar>
+          <ng-container *ngIf="ads.length > 0">
+            <ng-container *ngFor="let slide of ads">
+              <ng-template carouselSlide [id]="slide.id">
+                <div class="card border-0 box-shadow-none border-radius-0 mb-0">
+                  <div class="card-img-actions">
+                    <img *ngIf="!isLocal" class="card-img img-fluid"  width="10" height="10" [src]="slide.images[0]"
+                         [alt]="slide.titleDescription?.title"
+                         [title]="slide.titleDescription?.title">
+                    <img *ngIf="isLocal" class="card-img img-fluid"  width="10" height="10" [src]="storagePath.concat(slide.images[0])"
+                         [alt]="slide.titleDescription?.title"
+                         [title]="slide.titleDescription?.title">
+                  </div>
+                  <div class="card-body py-2 px-1">
+                    <h5 class="tk-bold f-15 text-ellipsis">
+                      <a class="tk-link"
+                         [routerLink]="[APP_URL.adView, slide.id, slide.titleDescription?.title, slide.code]">{{slide.titleDescription?.title}}</a>
+                    </h5>
+                  </div>
+                </div>
+              </ng-template>
+            </ng-container>
+          </ng-container>
+        </owl-carousel-o>
+        <ng-container *ngIf="ads.length < 1">
+          <div class="alert alert-light text-center">
+            No Featured ADs Yet
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</section>

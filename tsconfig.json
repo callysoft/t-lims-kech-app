@@ -1,0 +1,36 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "importHelpers": true,
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "target": "es2015",
+    "baseUrl": "src",
+    "paths": {
+      "shared/*": [
+        "app/shared/*"
+      ],
+      "core/*": [
+        "app/core/*"
+      ],
+      "feature/admin/*": [
+        "app/feature/admin/*"
+      ],
+      "feature/items/*": [
+        "app/feature/items/*"
+      ]
+    },
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "lib": [
+      "es2017",
+      "dom"
+    ],
+    "module": "es2015"
+  }
+}

@@ -1,0 +1,69 @@
+<form [formGroup]="oForm" novalidate>
+  <div class="row">
+    <div class="col-md-6">
+      <div formGroupName="subCategory">
+        <tlims-form-group label="Subcategory" required="true">
+          <select tlimsInput (change)="populateCodeValueName('subCategory')" formControlName="code">
+            <option *ngFor="let subCat of subCategories"
+                    [value]="subCat.categoryCode?.dataCode">{{subCat.titleDescription?.title}}</option>
+          </select>
+        </tlims-form-group>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div formGroupName="titleDescription">
+        <tlims-form-group label="Title" required="true">
+          <input tlimsInput placeholder="title" formControlName="title"/>
+          <tlims-form-error [control]="oForm.get('titleDescription').get('title')"></tlims-form-error>
+        </tlims-form-group>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-check mt-4">
+        <label class="form-check-label">
+          <input type="checkbox" formControlName="contactForPrice" (click)="contactForPriceFg($event.target.checked)"> Contact For Price
+        </label>
+      </div>
+    </div>
+    <div class="col-md-6" *ngIf="!this.oForm.get('contactForPrice').value">
+      <tlims-form-group label="Seller's Price">
+        <tlims-amount formControlName="price" [(ngModel)]="price"></tlims-amount>
+        <tlims-form-error [control]="oForm.get('price')"></tlims-form-error>
+      </tlims-form-group>
+    </div>
+    <div class="col-md-6">
+      <tlims-form-group label="Selling Price" required="true">
+<input type="number" class="form-control" value="{{price*1+2500}}" readonly="readonly" formControlName="selling_price">
+
+    </tlims-form-group>
+    </div>
+    <div class="col-md-6">
+      <div class="form-check mt-4">
+        <label class="form-check-label">
+          <input type="checkbox" formControlName="negotiable"> Negotiable
+        </label>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div formGroupName="titleDescription">
+        <tlims-description-box formControlName="description"></tlims-description-box>
+        <tlims-form-error [control]="oForm.get('titleDescription').get('description')"></tlims-form-error>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <tlims-form-group label="Size">
+        <ngx-input-tag formControlName="size" [tagSuggestions]="tagSuggestions"></ngx-input-tag>
+      </tlims-form-group>
+    </div>
+  </div>
+  <tlims-image-upload (images)="getImages($event)"></tlims-image-upload>
+  <tlims-contact-form (contactDetails)="getContact($event)"></tlims-contact-form>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group text-center">
+        <button [tlimsButton]="isLoading" (click)="create()" [disabled]="oForm.invalid">Save</button>
+        <button tlimsButton color="btn-danger" [disabled]="isLoading" (click)="cancel()">Cancel</button>
+      </div>
+    </div>
+  </div>
+</form>

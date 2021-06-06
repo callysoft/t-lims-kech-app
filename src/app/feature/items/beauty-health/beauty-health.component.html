@@ -1,0 +1,164 @@
+<form [formGroup]="bForm" novalidate>
+  <div class="row">
+    <div class="col-md-6">
+      <div formGroupName="subCategory">
+        <tlims-form-group label="Subcategory" required="true">
+          <select tlimsInput (change)="populateCodeValueName('subCategory')" formControlName="code">
+            <option *ngFor="let subCat of subCategories" [value]="subCat.categoryCode?.dataCode">{{subCat.titleDescription?.title}}</option>
+          </select>
+        </tlims-form-group>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div formGroupName="titleDescription">
+        <tlims-form-group label="Title" required="true">
+          <input tlimsInput placeholder="title" formControlName="title"/>
+          <tlims-form-error [control]="bForm.get('titleDescription').get('title')"></tlims-form-error>
+        </tlims-form-group>
+      </div>
+    </div>
+    <div class="col-md-6" *ngIf="isField2 || isField3 || isField4 || isField5">
+      <tlims-form-group label="Item Type" required="true" [isLoading]="isDataLoading">
+        <select tlimsInput formControlName="subCatType" [disableControl]="itemTypes.length === 0">
+          <option [ngValue]="null">--Select Item Type--</option>
+          <option *ngFor="let iType of itemTypes" [ngValue]="iType">{{iType.name}}</option>
+        </select>
+        <tlims-form-error [control]="bForm.get('subCatType')" label="Item Type"></tlims-form-error>
+      </tlims-form-group>
+    </div>
+    <div class="col-md-6" *ngIf="isField1 || isField3">
+      <tlims-form-group label="Brand">
+        <select tlimsInput formControlName="brand" required="true" [disableControl]="brands.length === 0">
+          <option [ngValue]="null">--Select Brand--</option>
+          <option *ngFor="let bd of brands" [ngValue]="bd">{{bd.name}}</option>
+        </select>
+        <tlims-form-error [control]="bForm.get('brand')" label="Brand"></tlims-form-error>
+      </tlims-form-group>
+    </div>
+    <div class="col-md-6" *ngIf="isField1 || isField3 || isField4">
+      <tlims-form-group label="Gender" required="true" [checkBox]="true">
+        <tlims-checkbox [label]="gend.value" styleClass="mr-2" *ngFor="let gend of genders; index as i">
+          <input type="radio" class="form-check-input" formControlName="gender" id="gender{{i}}" [value]="gend.name">
+        </tlims-checkbox>
+      </tlims-form-group>
+    </div>
+    <div class="col-md-6" *ngIf="isField3">
+      <tlims-form-group label="Color">
+        <select tlimsInput formControlName="color">
+          <option [ngValue]="null">--Select Color--</option>
+          <option *ngFor="let col of colors" [ngValue]="col">{{col.name}}</option>
+        </select>
+      </tlims-form-group>
+    </div>
+    <div class="col-md-6" *ngIf="isField1">
+      <tlims-form-group label="Scent">
+        <select tlimsInput formControlName="scent">
+          <option [ngValue]="null">--Select Scent--</option>
+          <option *ngFor="let col of scents" [ngValue]="col">{{col.name}}</option>
+        </select>
+      </tlims-form-group>
+    </div>
+    <div class="col-md-6" *ngIf="isField1 || isField5">
+      <tlims-form-group label="Formulation">
+        <select tlimsInput formControlName="formulation">
+          <option [ngValue]="null">--Select Formulation--</option>
+          <option *ngFor="let col of formulations" [ngValue]="col">{{col.name}}</option>
+        </select>
+      </tlims-form-group>
+    </div>
+    <div class="col-md-6" *ngIf="isField1">
+      <tlims-form-group label="Volume (ml)">
+        <input tlimsInput placeholder="volume" formControlName="volume"/>
+      </tlims-form-group>
+    </div>
+    <div class="col-md-6" *ngIf="isField3">
+      <tlims-form-group label="Tone">
+        <select tlimsInput formControlName="tone">
+          <option [ngValue]="null">--Select Tone--</option>
+          <option *ngFor="let col of tones" [ngValue]="col">{{col.name}}</option>
+        </select>
+      </tlims-form-group>
+    </div>
+    <div class="col-md-6" *ngIf="isField4">
+      <tlims-form-group label="Skin Type">
+        <select tlimsInput formControlName="skinType">
+          <option [ngValue]="null">--Select Skin Type--</option>
+          <option *ngFor="let col of skinTypes" [ngValue]="col">{{col.name}}</option>
+        </select>
+      </tlims-form-group>
+    </div>
+    <div class="col-md-6" *ngIf="isField4">
+      <tlims-form-group label="Target Area">
+        <select tlimsInput formControlName="targetArea">
+          <option [ngValue]="null">--Select Target Area--</option>
+          <option *ngFor="let col of targetAreas" [ngValue]="col">{{col.name}}</option>
+        </select>
+      </tlims-form-group>
+    </div>
+    <div class="col-md-6" *ngIf="isField4">
+      <tlims-form-group label="Benefits">
+        <select tlimsInput formControlName="benefits">
+          <option [ngValue]="null">--Select Benefits--</option>
+          <option *ngFor="let col of benefits" [ngValue]="col">{{col.name}}</option>
+        </select>
+      </tlims-form-group>
+    </div>
+    <div class="col-md-6" *ngIf="isField5">
+      <tlims-form-group label="Age Group">
+        <select tlimsInput formControlName="ageGroup">
+          <option [ngValue]="null">--Select Age Group--</option>
+          <option *ngFor="let col of ageGroups" [ngValue]="col">{{col.name}}</option>
+        </select>
+      </tlims-form-group>
+    </div>
+    <div class="col-md-6" *ngIf="isField5">
+      <tlims-form-group label="Package">
+        <select tlimsInput formControlName="vPackage">
+          <option [ngValue]="null">--Select Package--</option>
+          <option *ngFor="let col of packages" [ngValue]="col">{{col.name}}</option>
+        </select>
+      </tlims-form-group>
+    </div>
+    <div class="col-md-6">
+      <tlims-form-group label="Seller's Price"  required="true">
+        <tlims-amount formControlName="price" [(ngModel)]="price"></tlims-amount>
+        <tlims-form-error [control]="bForm.get('price')"></tlims-form-error>
+      </tlims-form-group>
+    </div>
+
+    
+
+    <div class="col-md-6">
+      <tlims-form-group label="Selling Price" required="true" type="number">
+      
+<input type="number" class="form-control" value="{{price*1+2500}}" readonly="readonly" name="selling_price">
+
+    </tlims-form-group>
+    </div>
+    <div class="col-md-12">
+      <div formGroupName="titleDescription">
+        <tlims-description-box formControlName="description"></tlims-description-box>
+        <tlims-form-error [control]="bForm.get('titleDescription').get('description')"></tlims-form-error>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <tlims-form-group>
+        <div class="form-check mt-2">
+          <label class="form-check-label">
+            <input type="checkbox" name="negotiable" formControlName="negotiable"> Negotiable
+          </label>
+        </div>
+      </tlims-form-group>
+    </div>
+  </div>
+  <tlims-image-upload (images)="getImages($event)"></tlims-image-upload>
+  <tlims-contact-form (contactDetails)="getContact($event)"></tlims-contact-form>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group text-center">
+        <button [tlimsButton]="isLoading" (click)="create()" [disabled]="bForm.invalid">Save</button>
+        <button tlimsButton color="btn-danger" [disabled]="isLoading" (click)="cancel()">Cancel</button>
+      </div>
+    </div>
+  </div>
+</form>

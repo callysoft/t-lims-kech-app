@@ -1,0 +1,86 @@
+
+<tlims-search-box title="app.core.contactus" [withBreadCrumb]="false"></tlims-search-box>
+<tlims-content>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="information mb-4">
+          <h3>About Tlims</h3>
+          <div class="contact-datails">
+            <p>Tlims-Kech is a powerful, responsive, and high-performance admin template. It's based 
+              on Bootstrap and contains a lot of components to easily make an admin, dashboard.</p>
+            <p>This template comes with a simple yet beautiful design which focused on ease of use for users. </p>
+            <p>Efficiently expedite equity invested products rather than extensive outsourcing. 
+              Holisticly deliver principle centered imperatives after.</p>
+          </div>
+        </div>
+        <div class="information">
+          <h3>Contact Info</h3>
+          <div class="contact-datails">
+            <ul class="list-unstyled info">
+              <li><span>Address : </span><p></p></li>
+              <li><span>Email : </span><p><a href="#">customerservice@tlims-kech.com</a></p></li>
+              <li><span>Phone : </span><p>&amp;</p></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-8">
+        <div class="card card-body">
+      
+          
+          <h5 align="center" class="font-weight-bold title">Contact Form</h5>
+          <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          
+            <div class="row">
+              <div class="col-md-6">
+                <ng-container *ngIf="isSuccess">
+                  <div class="alert alert-success">
+                   Message Sent successfully;
+                  </div>
+                </ng-container>
+                <div>
+                  <tlims-form-group label="app.core.name">
+                    <input type="text" class="form-control" placeholder="Enter Full Name Here" formControlName="names">
+                  </tlims-form-group>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div>
+                  <tlims-form-group label="app.core.phonenumber">
+                    <input type="text" class="form-control" placeholder="Enter Phone Number Here" formControlName="phoneNumber">
+                  </tlims-form-group>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div>
+                  <tlims-form-group label="app.core.email">
+                    <input type="email" class="form-control"  placeholder="Enter Email Here" formControlName="senderEmail">
+                  </tlims-form-group>
+                </div>
+              </div>
+              
+              <div class="col-md-12">
+                <textarea class="form-control" rows="4" cols="100" formControlName="message">
+                 
+                  </textarea>
+              </div>
+            </div>
+          
+            <div class="form-group">
+              <button  type="submit" [disabled]="!form.valid" class="btn btn-info">Send</button>
+
+                   </div>
+
+                  
+          </form>
+          </div>
+          </div>
+          </div>
+          </div>
+         
+</tlims-content>
+
+
+
+
